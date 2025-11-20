@@ -75,21 +75,21 @@ for i, video in enumerate(top_20_yesterday, 1):
     yesterday_str = format_japanese_style(video["yesterday_views"])
     total_str = format_japanese_style(video["total_views"])
 
-    print(f"{i:2}. {video['title']}")
-    print(f"    Yesterday views : {yesterday_str:>{width_total}}")
-    print(f"    Total views     : {total_str:>{width_total}}")
-    print()
-
     result += f"{i:2}. {video['title']}\n"
-    result += f"    Yesterday views : {yesterday_str:>{width_total}}\n"
-    result += f"    Total views     : {total_str:>{width_total}}\n"
+    result += f"昨: {yesterday_str:>{width_total}}\n"
+    result += f"合: {total_str:>{width_total}}\n"
+
     result += "\n"
+
+    print(result)
+
+result = "```" + result + "```"
 
 import time
 import os
 
 TELEGRAM_BOT_TOKEN = os.environ["bot_token"]
-TELEGRAM_CHAT_ID = os.environ["chat_id"]
+TELEGRAM_CHAT_ID = "-1002350782955"  # os.environ["chat_id"]
 
 
 def send_telegram_message(msg, channel_id):
@@ -104,6 +104,7 @@ def send_telegram_message(msg, channel_id):
                     "chat_id": channel_id,
                     "text": part,
                     "link_preview_options": {"is_disabled": True},
+                    "parse_mode": "MarkdownV2",
                 }
                 response = requests.post(
                     f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage",
