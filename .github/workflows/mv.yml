@@ -26,7 +26,7 @@ jobs:
         pwd
         pip install requests bs4
         pip freeze
-        python fra.py
+        python mv.py
       env:
           bot_token: ${{ secrets.bot_token }}
           chat_id: ${{ secrets.chat_id }}
